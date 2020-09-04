@@ -1,0 +1,18 @@
+.about-title {
+  padding-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #5b9dff;
+  text-align: center;
+}
+
+.about-content {
+  padding: 15px;
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.about-text {
+  text-indent: 2em;
+}

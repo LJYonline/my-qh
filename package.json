@@ -25,7 +25,7 @@
     "core-js": "^3.6.5",
     "lib-flexible": "^0.3.2",
     "normalize.css": "8.0.1",
-    "vant": "^2.8.7",
+    "vant": "^2.10.3",
     "vue": "2.6.11",
     "vue-router": "3.1.5",
     "vue-svgicon": "3.2.6"
@@ -61,7 +61,7 @@
     "svn-info": "^1.0.0",
     "tasksfile": "^5.1.0",
     "vue-cli-plugin-qrcode": "*",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "2.6.11",
     "webpackbar": "^4.0.0",
     "webstorm-disable-index": "^1.2.0"
   },

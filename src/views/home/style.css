@@ -1,0 +1,41 @@
+/* 重写vant的table样式 */
+
+.van-tabs--line,
+.van-tabs__nav,
+.van-tab {
+  height: 41px;
+}
+
+.van-tabs--line {
+  height: 41px;
+  padding-bottom: 0;
+}
+
+.van-tabs__wrap {
+  height: 41px !important;
+}
+
+.van-tabs__wrap--scrollable .van-tabs__nav--complete {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.van-tabs__line {
+  bottom: 0.45rem;
+}
+
+.table-content {
+  width: auto;
+  height: 100%;
+  margin-top: 14px;
+  background-color: #fff;
+}
+
+p {
+  padding: 5px 0;
+  color: #000;
+}
+
+b {
+  font-weight: bolder;
+}

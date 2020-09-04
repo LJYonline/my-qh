@@ -3,7 +3,7 @@
 const path = require('path');
 const pkg = require('./package.json');
 const webpack = require('webpack');
-const {formatDate} = require('@winner-fed/cloud-utils');
+const { formatDate } = require('@winner-fed/cloud-utils');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const WebpackBar = require('webpackbar');
@@ -40,10 +40,10 @@ const genPlugins = () => {
       ignore: ['images', 'components'],
       redirect: [
         {
-          redirect: '/hello',
-          path: '/'
-        }
-      ]
+          redirect: '/home',
+          path: '/',
+        },
+      ],
     }),
     // 为静态资源文件添加 hash，防止缓存
     new AddAssetHtmlPlugin([
@@ -54,7 +54,7 @@ const genPlugins = () => {
       {
         filepath: path.resolve(__dirname, './public/console.js'),
         hash: true,
-      }
+      },
     ]),
   ];
 
@@ -62,23 +62,21 @@ const genPlugins = () => {
     plugins.push(
       // bannerPlugin
       new webpack.BannerPlugin({
-        banner:
-          `@author: Winner FED${
-            N}@version: ${pkg.version}${
-            N}@description: Build time ${formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss')} and svn version ${getSvnInfo()}
-          `
+        banner: `@author: Winner FED${N}@version: ${
+          pkg.version
+        }${N}@description: Build time ${formatDate(
+          new Date(),
+          'yyyy-MM-dd HH:mm:ss'
+        )} and svn version ${getSvnInfo()}
+          `,
       }),
       new CompressionWebpackPlugin({
         filename: '[path].gz[query]',
         algorithm: 'gzip',
-        test: new RegExp(
-          '\\.(' +
-          ['js', 'css'].join('|') +
-          ')$'
-        ),
+        test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
         threshold: 10240,
         minRatio: 0.8,
-        cache: true
+        cache: true,
       })
     );
   }
@@ -100,11 +98,11 @@ const getOptimization = () => {
               warnings: false,
               drop_console: true,
               drop_debugger: true,
-              pure_funcs: ['console.log']
-            }
-          }
-        })
-      ]
+              pure_funcs: ['console.log'],
+            },
+          },
+        }),
+      ],
     };
   }
   return optimization;
@@ -133,8 +131,8 @@ module.exports = {
     hotOnly: false,
     overlay: {
       warnings: false,
-      errors: true
-    }
+      errors: true,
+    },
     // 代理示例 https://webpack.docschina.org/configuration/dev-server/#devserver-proxy
     // proxy: {
     //   '/api': {
@@ -154,7 +152,7 @@ module.exports = {
     // 开启 CSS source maps?
     sourceMap: isProd() ? true : false,
     // css预设器配置项
-    loaderOptions: {}
+    loaderOptions: {},
   },
   configureWebpack: () => ({
     name: `${pkg.name}`,
@@ -171,15 +169,17 @@ module.exports = {
         '@views': resolve('src/views'),
 
         // 文件别名
-        'services': resolve('src/services'),
-        'variable': resolve('src/assets/less/variable.less'),
-        'utils': resolve('node_modules/@winner-fed/cloud-utils/dist/cloud-utils.esm'),
-        'mixins': resolve('node_modules/@winner-fed/magicless/magicless.less'),
-      }
+        services: resolve('src/services'),
+        variable: resolve('src/assets/less/variable.less'),
+        utils: resolve(
+          'node_modules/@winner-fed/cloud-utils/dist/cloud-utils.esm'
+        ),
+        mixins: resolve('node_modules/@winner-fed/magicless/magicless.less'),
+      },
     },
     plugins: genPlugins(),
     // https://github.com/cklwblove/vue-cli3-template/issues/12
-    optimization: getOptimization()
+    optimization: getOptimization(),
   }),
   // webpack配置
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
@@ -201,40 +201,35 @@ module.exports = {
       .loader('url-loader')
       .end();
 
-    config
-      .when(process.env.NODE_ENV === 'development',
-        config => config.devtool('cheap-eval-source-map')
-      );
+    config.when(process.env.NODE_ENV === 'development', (config) =>
+      config.devtool('cheap-eval-source-map')
+    );
 
     // plugin
 
     // preload
     // runtime.js 内联的形式嵌入
-    config
-      .plugin('preload')
-      .tap(args => {
-        args[0].fileBlacklist.push(/runtime\./);
-        return args;
-      });
+    config.plugin('preload').tap((args) => {
+      args[0].fileBlacklist.push(/runtime\./);
+      return args;
+    });
 
     // webpack-html-plugin
-    config
-      .plugin('html')
-      .tap((args) => {
-        args[0].minify = {
-          removeComments: true,
-          collapseWhitespace: true,
-          removeAttributeQuotes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeStyleLinkTypeAttributes: true,
-          keepClosingSlash: true,
-          minifyJS: true,
-          minifyCSS: true,
-          minifyURLs: true
-        };
-        return args;
-      });
+    config.plugin('html').tap((args) => {
+      args[0].minify = {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      };
+      return args;
+    });
 
     // set preserveWhitespace
     config.module
@@ -248,44 +243,41 @@ module.exports = {
       .end();
 
     // optimization
-    config
-      .when(process.env.NODE_ENV === 'production',
-        config => {
-          config
-            .plugin('ScriptExtHtmlWebpackPlugin')
-            .after('html')
-            .use('script-ext-html-webpack-plugin', [{
-              // `runtime` must same as runtimeChunk name. default is `runtime`
-              inline: /runtime\..*\.js$/
-            }])
-            .end();
+    config.when(process.env.NODE_ENV === 'production', (config) => {
+      config
+        .plugin('ScriptExtHtmlWebpackPlugin')
+        .after('html')
+        .use('script-ext-html-webpack-plugin', [
+          {
+            // `runtime` must same as runtimeChunk name. default is `runtime`
+            inline: /runtime\..*\.js$/,
+          },
+        ])
+        .end();
 
-          config
-            .optimization
-            .splitChunks({
-              chunks: 'all',
-              cacheGroups: {
-                vendors: {
-                  name: 'chunk-vendors',
-                  test: /[\\/]node_modules[\\/]/,
-                  priority: 10,
-                  chunks: 'initial' // 只打包初始时依赖的第三方
-                },
-                commons: {
-                  name: 'chunk-commons',
-                  test: resolve('src/components'), // 可自定义拓展你的规则
-                  minChunks: 3, // 最小公用次数
-                  priority: 5,
-                  reuseExistingChunk: true
-                }
-              }
-            });
-          config.optimization.runtimeChunk('single');
-        }
-      );
+      config.optimization.splitChunks({
+        chunks: 'all',
+        cacheGroups: {
+          vendors: {
+            name: 'chunk-vendors',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: 'initial', // 只打包初始时依赖的第三方
+          },
+          commons: {
+            name: 'chunk-commons',
+            test: resolve('src/components'), // 可自定义拓展你的规则
+            minChunks: 3, // 最小公用次数
+            priority: 5,
+            reuseExistingChunk: true,
+          },
+        },
+      });
+      config.optimization.runtimeChunk('single');
+    });
   },
   pluginOptions: {
     lintStyleOnBuild: true,
-    stylelint: {}
-  }
+    stylelint: {},
+  },
 };

@@ -1,0 +1,33 @@
+.account-title {
+  padding-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #5b9dff;
+  text-align: center;
+}
+
+.cash-mark {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  margin-bottom: -2px;
+  line-height: 100%;
+  background-color: #ff3030;
+}
+
+.cash-item {
+  display: inline-block;
+  width: 95%;
+}
+
+.account-item-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  text-align: justify;
+}
+
+strong {
+  display: flex;
+  font-weight: bolder;
+}

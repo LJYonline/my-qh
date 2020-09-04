@@ -1,0 +1,23 @@
+.exchange-item {
+  display: inline-block;
+  width: 95%;
+  font-size: 16px !important;
+  line-height: 1.6;
+  color: #333;
+}
+
+.exchange-item-text {
+  padding: 5px 0;
+  font-size: 14px !important;
+  color: #666 !important;
+  text-align: justify;
+  text-indent: 2em;
+}
+
+.exchange-item-text p {
+  color: #000 !important;
+}
+
+.van-collapse-item__content {
+  padding: 15px;
+}
